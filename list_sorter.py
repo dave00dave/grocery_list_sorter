@@ -11,6 +11,7 @@ import csv
 from guizero import App, Box, Text, TextBox, PushButton
 import os
 import smtplib, ssl
+import pathlib
 
 class item:
     def __init__(self, item_no, label):
@@ -95,7 +96,9 @@ def save_list():
             filename = save_name + '.csv'
             pass
         if os.path.exists(filename):
-            choice = app.yesno("File Exists", "Do you want to overwrite the saved list?")
+            tmp_path = pathlib.Path(filename)
+            choice = app.yesno("File Exists",
+                               "Do you want to overwrite " + tmp_path.name + " ?")
         else:
             choice = True
         if choice:
